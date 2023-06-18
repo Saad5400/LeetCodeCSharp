@@ -2,8 +2,8 @@
 class ListNode
 {
     public int val;
-    public ListNode next;
-    public ListNode(int val = 0, ListNode next = null)
+    public ListNode? next;
+    public ListNode(int val = 0, ListNode? next = null)
     {
         this.val = val;
         this.next = next;
@@ -12,7 +12,7 @@ class ListNode
 
 class Solution
 {
-    public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+    public ListNode AddTwoNumbers(ListNode? l1, ListNode? l2)
     {
 
         var lc = new ListNode();
@@ -74,7 +74,7 @@ public class Program
 
 
         // call method and get result
-        ListNode result = sol.AddTwoNumbers(l1, l2);
+        ListNode? result = sol.AddTwoNumbers(l1, l2);
 
         // print the result
         while (result != null)

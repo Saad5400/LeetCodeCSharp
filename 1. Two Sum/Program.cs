@@ -25,3 +25,5 @@
 
     return new int[2];
 }
+
+Console.WriteLine(string.Join(", ", TwoSum(new int[] { 2, 7, 11, 15 }, 9))); // 0, 1

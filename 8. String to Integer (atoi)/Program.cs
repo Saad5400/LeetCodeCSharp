@@ -24,7 +24,7 @@
         {
             return isNegative ? -int.Parse(s) : int.Parse(s);
         }
-        catch (FormatException e)
+        catch (FormatException)
         {
             string result = string.Empty;
             foreach (char c in s)
@@ -37,7 +37,7 @@
             return isNegative ? -int.Parse(result) : int.Parse(result);
         }
     }
-    catch (OverflowException e)
+    catch (OverflowException)
     {
         return isNegative ? -(int)Math.Pow(2, 31) : (int)(Math.Pow(2, 31) - 1);
     }

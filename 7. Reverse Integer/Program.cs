@@ -11,7 +11,7 @@
         else
             return int.Parse("-" + s.Substring(1).Aggregate("", (acc, x) => x + acc));
     }
-    catch (OverflowException e)
+    catch (OverflowException)
     {
         return 0;
     }
