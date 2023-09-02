@@ -2,52 +2,50 @@
 {
     IList<IList<int>> result = new List<IList<int>>();
 
-    if (nums.Length == 3)
-    {
-        if (nums.Sum() != 0)
-        {
-            return result;
-        }
-        else
-        {
-            result.Add(nums.ToList());
-            return result;
-        }
-    }
+    if (nums.Length <= 2) return result;
 
-    nums = nums.OrderBy(x => x).ToArray();
+    Array.Sort(nums);
 
-    for (int i = 0; i < nums.Length; i++)
+    int start = 0, left, right;
+
+    int target;
+
+    while (start < nums.Length - 2)
     {
-        if (nums[i] > 0)
-            break;
-        for (int j = i + 1; j < nums.Length; j++)
+        target = nums[start] * -1;
+        left = start + 1;
+        right = nums.Length - 1;
+
+        while (left < right)
         {
-            if (nums[i] + nums[j] > 0)
-                break;
-            for (int k = j + 1; k < nums.Length; k++)
+            if (nums[left] + nums[right] > target)
             {
-                if (nums[i] + nums[j] + nums[k] > 0)
-                    break;
-                if (nums[i] + nums[j] + nums[k] == 0)
-                    result.Add(new List<int>
-                    {
-                        nums[i],
-                        nums[j],
-                        nums[k],
-                    });
+                --right;
             }
+            else if (nums[left] + nums[right] < target)
+            {
+                ++left;
+            }
+            else
+            {
+                List<int> OneSolution = new List<int>() { nums[start], nums[left], nums[right] };
+                result.Add(OneSolution);
+
+                while (left < right && nums[left] == OneSolution[1])
+                    ++left;
+                while (left < right && nums[right] == OneSolution[2])
+                    --right;
+            }
+
         }
+        int currentStartNumber = nums[start];
+        while (start < nums.Length - 2 && nums[start] == currentStartNumber)
+            ++start;
     }
-
-    // distinct
-    result = result.DistinctBy(x => string.Join(",", x.OrderBy(x => x))).ToList();
-
     return result;
 }
 
-IList<IList<int>> result1 = ThreeSum(new int[] { -1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4 });
-// [[-4,0,4],[-4,1,3],[-3,-1,4],[-3,0,3],[-3,1,2],[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]
+IList<IList<int>> result1 = ThreeSum(new int[] { 3, 0, -2, -1, 1, 2 });
 
 Console.WriteLine("result1:");
 foreach (var list in result1)
